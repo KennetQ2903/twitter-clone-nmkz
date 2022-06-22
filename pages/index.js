@@ -1,6 +1,19 @@
-import Head from 'next/head'
+import { useState, useEffect } from 'react'
+import Head from 'next/head';
 import { AppLayout } from 'components/AppLayout';
-export default function Home() {
+import Button from 'components/Button';
+import { loginWithGithub, onAuth } from 'FirebaseSR/client';
+import Image from 'next/image';
+export default function Home () {
+  const [ user, setUser ] = useState( undefined )
+  useEffect( () => {
+    onAuth(setUser) 
+  }, [user])
+  const handleClick = () => {
+    loginWithGithub()
+      .then(setUser)
+      .catch( err => console.log( err ) )
+  };
   return (
     <div>
       <Head>
@@ -10,10 +23,32 @@ export default function Home() {
       </Head>
 
       <AppLayout>
-        <h1>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <section>
+          <Image src='/dev.png' alt='logo' width='120px' height='120px' /> 
+          <h1> Developers talking with developers</h1>
+          {
+            user === null && <Button onClick={handleClick}>
+                Login with Github
+                <img style={{marginLeft: '10px'}} src='/github.png' alt='login icon' width='24px' height='24px' />
+              </Button>
+          }
+          {
+            user?.avatar && <div>
+                <img src={ user.avatar } alt='user photo' />
+                <strong>{ user.username }</strong>
+            </div>
+          }
+        </section>
       </AppLayout>
+
+      <style jsx>{ `
+          section {
+            display: grid;
+            place-content: center;
+            place-items: center;
+            height: 100%;
+          }
+        `}</style>
     </div>
   )
 }

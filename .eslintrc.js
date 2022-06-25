@@ -12,7 +12,9 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
-    'standard'
+    // 'next/core-web-vitals',
+    'standard',
+    'standard-jsx'
   ],
   parserOptions: {
     ecmaFeatures: {

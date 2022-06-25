@@ -1,7 +1,6 @@
 .container{
     align-items: center;
     display: flex;
-    justify-content: space-around;
 }
 .avatar {
     border-radius: 9999px;

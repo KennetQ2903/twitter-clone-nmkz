@@ -1,7 +1,7 @@
-import css from 'styled-jsx/css';
-import { breakPoints, colors, fonts } from "styles/theme";
-import { addOpacity } from "styles/utils";
-const backgroundColor = addOpacity( colors.black, 1 )
+import css from 'styled-jsx/css'
+import { breakPoints, colors, fonts } from 'styles/theme'
+import { addOpacity } from 'styles/utils'
+const backgroundColor = addOpacity(colors.black, 1)
 
 export default css`
     div{
@@ -16,6 +16,7 @@ export default css`
         border-radius: 7px;
         box-shadow: 15px 15px 0 rgba(0, 0, 0, 1);
         border: 2px solid rgba(0, 0, 0, 1);
+        position: relative;
     }
     @media (min-width: ${breakPoints.mobile}) {
         main {

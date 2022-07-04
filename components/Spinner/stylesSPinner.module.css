@@ -1,0 +1,65 @@
+.loader {
+  width: 47px;
+  height: 47px;
+  position: relative;
+  margin-top: 50px;
+}
+
+.loader:before,
+.loader:after {
+  content: "";
+  display: block;
+  border: 24px solid;
+  border-color: transparent transparent rgb(0, 0, 0) rgb(0, 0, 0);
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: mvx 1.2s infinite ease-in;
+}
+
+.loader:before {
+  border-color: rgb(0, 0, 0) rgb(0, 0, 0) transparent transparent;
+  animation-name: mvrx;
+}
+
+@keyframes mvx {
+
+  0%,
+  10% {
+    transform: translate(0, 0) rotate(0deg)
+  }
+
+  30% {
+    transform: translate(-50%, -50%) rotate(0deg)
+  }
+
+  50% {
+    transform: translate(-50%, -50%) rotate(180deg)
+  }
+
+  75%,
+  100% {
+    transform: translate(0, 0) rotate(180deg)
+  }
+}
+
+@keyframes mvrx {
+
+  0%,
+  10% {
+    transform: translate(0, 0) rotate(0deg)
+  }
+
+  30% {
+    transform: translate(50%, 50%) rotate(0deg)
+  }
+
+  50% {
+    transform: translate(50%, 50%) rotate(180deg)
+  }
+
+  75%,
+  100% {
+    transform: translate(0, 0) rotate(180deg)
+  }
+}

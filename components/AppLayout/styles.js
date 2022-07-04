@@ -17,6 +17,7 @@ export default css`
         box-shadow: 15px 15px 0 rgba(0, 0, 0, 1);
         border: 2px solid rgba(0, 0, 0, 1);
         position: relative;
+        overflow-y: auto;
     }
     @media (min-width: ${breakPoints.mobile}) {
         main {
@@ -36,6 +37,7 @@ export const globalStyles = css.global`
     background-size: 50px 50px;
     padding: 0;
     margin: 0;
+    overflow: hidden;
     font-family: ${fonts.base}
     }
 

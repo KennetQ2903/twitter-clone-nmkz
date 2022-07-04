@@ -1,5 +1,5 @@
-import css from "styled-jsx/css";
-import { colors } from "styles/theme";
+import css from 'styled-jsx/css'
+import { colors } from 'styles/theme'
 
 export default css`
     button {
@@ -16,4 +16,4 @@ export default css`
         cursor: pointer;
         margin: 5px;
     }
-`;
+`

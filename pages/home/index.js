@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 
 export default function HomePage () {
   const [timeline, setTimeline] = useState([])
+  /* Fetching the data from the API and setting the state of the timeline. */
 
   useEffect(() => {
     fetch('http://localhost:3000/api/statuses/home_timeline')
@@ -14,7 +15,7 @@ export default function HomePage () {
     <>
       <AppLayout>
         <header>
-          header
+          <h2>Inicio</h2>
         </header>
         <section>
           {
@@ -29,34 +30,32 @@ export default function HomePage () {
             ))
           }
         </section>
-        <nav>
-          nav
-        </nav>
+        <nav />
 
       </AppLayout>
       <style jsx>
         {`
-            section {
-                padding-top: 49px;
-            }
-            
             header {
                 height: 49px;
-                border-bottom: 1px solid #ccc;
+                background-color: #ffffff;
                 top: 0;
                 position: sticky;
                 width: 100%;
                 display: flex;
                 align-items: center;
             }
+            h2 {
+              font-size: 21px;
+              font-weight: 800;
+              padding-left: 15px;
+            }
             nav {
+              background-color: #fff;
                 height: 49px;
                 bottom: 0px;
                 border-top: 1px solid #ccc;
-                position: absolute;
+                position: sticky;
                 width: 100%;
-                display: flex;
-                align-items: center;
             }
         `}
       </style>

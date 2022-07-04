@@ -4,17 +4,27 @@ import { AppLayout } from 'components/AppLayout'
 import Button from 'components/Button'
 import { loginWithGithub, onAuth } from 'FirebaseSR/client'
 import Image from 'next/image'
-import { Avatar } from 'components/Avatar'
+import { useRouter } from 'next/router'
+import { Spinner } from '@c/Spinner'
+
+const USER_STATES = {
+  NOT_LOGGED: null,
+  NOT_KNOW: undefined
+}
 export default function Home () {
-  const [user, setUser] = useState(undefined)
+  const router = useRouter()
+  const [user, setUser] = useState(USER_STATES.NOT_KNOW)
   useEffect(() => {
     onAuth(setUser)
   }, [user])
   const handleClick = () => {
     loginWithGithub()
-      .then(setUser)
       .catch(err => console.log(err))
   }
+  useEffect(() => {
+    user && router.replace('/home')
+  }, [user])
+
   return (
     <div>
       <Head>
@@ -28,17 +38,14 @@ export default function Home () {
           <Image src='/dev.png' alt='logo' width='120px' height='120px' />
           <h1> Developers talking with developers</h1>
           {
-            user === null &&
+            user === USER_STATES.NOT_LOGGED &&
               <Button onClick={handleClick}>
                 Login with Github
                 <img style={{ marginLeft: '10px' }} src='/github.png' alt='login icon' width='24px' height='24px' />
               </Button>
           }
           {
-            user?.avatar &&
-              <div>
-                <Avatar src={user.avatar} alt={user.username} text={user.username} withText />
-              </div>
+            user === USER_STATES.NOT_KNOW && <Spinner />
           }
         </section>
       </AppLayout>

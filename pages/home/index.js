@@ -1,16 +1,19 @@
 import { Twit } from '@c/Twit'
 import { AppLayout } from 'components/AppLayout'
+import { fetchLatestDevits } from 'FirebaseSR/client'
+import { useUser } from 'hooks/userUser'
 import { useEffect, useState } from 'react'
 
 export default function HomePage () {
   const [timeline, setTimeline] = useState([])
-  /* Fetching the data from the API and setting the state of the timeline. */
+  const user = useUser()
 
+  /* Fetching the data from the API and setting the state of the timeline. */
   useEffect(() => {
-    fetch('http://localhost:3000/api/statuses/home_timeline')
-      .then(res => res.json())
+    user && fetchLatestDevits()
       .then(setTimeline)
-  }, [])
+  }, [user])
+
   return (
     <>
       <AppLayout>
@@ -22,10 +25,12 @@ export default function HomePage () {
             timeline.map(twit => (
               <Twit
                 avatar={twit.avatar}
+                createdAt={twit.createdAt}
                 id={twit.id}
                 key={twit.id}
-                message={twit.message}
-                username={twit.username}
+                message={twit.content}
+                userId={twit.userId}
+                username={twit.userName}
               />
             ))
           }

@@ -1,6 +1,6 @@
 import { Avatar } from '@c/Avatar'
 
-export const Twit = ({ avatar, username, message, id }) => {
+export const Twit = ({ avatar, username, message, id, userId, createdAt }) => {
   return (
     <>
       <article>
@@ -8,7 +8,11 @@ export const Twit = ({ avatar, username, message, id }) => {
           <Avatar src={avatar} alt={username} />
         </div>
         <section>
-          <strong>{username}</strong>
+          <header>
+            <strong>{username}</strong>
+            <span> - </span>
+            <date>{createdAt}</date>
+          </header>
           <p>{message}</p>
         </section>
       </article>
@@ -25,6 +29,10 @@ export const Twit = ({ avatar, username, message, id }) => {
             p{
                 line-height: 1.3125;
                 margin: 0;
+            }
+            date{
+              color: #555;
+              font-size: 14px;
             }
       `}
       </style>

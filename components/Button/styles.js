@@ -15,5 +15,10 @@ export default css`
         transition: all .3s ease;
         cursor: pointer;
         margin: 5px;
+        user-select: none;
+    }
+    button[disabled] {
+        pointer-events: none;
+        opacity: .5;
     }
 `

@@ -1,22 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import Head from 'next/head'
 import { AppLayout } from 'components/AppLayout'
 import Button from 'components/Button'
-import { loginWithGithub, onAuth } from 'FirebaseSR/client'
+import { loginWithGithub } from 'FirebaseSR/client'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { Spinner } from '@c/Spinner'
+import { USER_STATES, useUser } from 'hooks/userUser'
 
-const USER_STATES = {
-  NOT_LOGGED: null,
-  NOT_KNOW: undefined
-}
 export default function Home () {
   const router = useRouter()
-  const [user, setUser] = useState(USER_STATES.NOT_KNOW)
-  useEffect(() => {
-    onAuth(setUser)
-  }, [user])
+  const user = useUser()
+
   const handleClick = () => {
     loginWithGithub()
       .catch(err => console.log(err))

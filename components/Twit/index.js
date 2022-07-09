@@ -1,6 +1,8 @@
 import { Avatar } from '@c/Avatar'
+import { useTimeAgo } from 'hooks/useTimeAgo'
 
 export const Twit = ({ avatar, username, message, id, userId, createdAt }) => {
+  const timeago = useTimeAgo(createdAt)
   return (
     <>
       <article>
@@ -11,7 +13,7 @@ export const Twit = ({ avatar, username, message, id, userId, createdAt }) => {
           <header>
             <strong>{username}</strong>
             <span> - </span>
-            <date>{createdAt}</date>
+            <date>{timeago}</date>
           </header>
           <p>{message}</p>
         </section>

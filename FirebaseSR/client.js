@@ -102,7 +102,7 @@ export const fetchLatestDevits = async () => {
     return {
       ...data,
       id,
-      createdAt: normalizedCreatedAt
+      createdAt: +createdAt.toDate()
     }
   })
 }

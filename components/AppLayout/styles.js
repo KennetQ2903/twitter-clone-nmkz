@@ -10,6 +10,8 @@ export default css`
         height: 100vh;
     }
     main {
+        display: flex;
+        flex-direction: column;
         background-color: #fff;
         height: 100%;
         width: 100%;

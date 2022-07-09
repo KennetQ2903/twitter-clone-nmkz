@@ -2,6 +2,7 @@ import { AppLayout } from '@c/AppLayout'
 import Button from '@c/Button'
 import { addDevit } from 'FirebaseSR/client'
 import { useUser } from 'hooks/userUser'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 /**
@@ -45,6 +46,10 @@ export default function ComposeTweet () {
   return (
     <>
       <AppLayout>
+        <Head>
+          <title>Crear Devit | NMKZ</title>
+        </Head>
+
         <form onSubmit={handleSubmit}>
           <textarea placeholder='Que hay de nuevo?' value={message} onChange={handleMessage} />
           <div>

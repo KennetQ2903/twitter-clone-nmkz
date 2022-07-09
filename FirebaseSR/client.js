@@ -1,6 +1,6 @@
 import { initializeApp, getApps } from 'firebase/app'
 import { GithubAuthProvider, signInWithPopup, getAuth, onAuthStateChanged } from 'firebase/auth'
-import { getFirestore, collection, getDocs, addDoc, Timestamp } from 'firebase/firestore'
+import { getFirestore, collection, getDocs, addDoc, Timestamp, orderBy, query } from 'firebase/firestore'
 const firebaseConfig = {
   apiKey: 'AIzaSyCAWNARb370xpaExSnXyjF6FXxm2TD_ArA',
   authDomain: 'nmkzdev-f2502.firebaseapp.com',
@@ -92,13 +92,12 @@ export const addDevit = async ({ avatar, content, userId, userName }) => {
 }
 
 export const fetchLatestDevits = async () => {
-  const querySnapshot = await getDocs(collection(db, 'devits'))
+  const devitsRef = collection(db, 'devits')
+  const querySnapshot = await getDocs(query(devitsRef, orderBy('createdAt', 'desc')))
   return querySnapshot.docs.map(doc => {
     const data = doc.data()
     const { id } = doc
     const { createdAt } = data
-    const date = new Date(createdAt.seconds * 1000)
-    const normalizedCreatedAt = new Intl.DateTimeFormat('es-ES').format(date)
     return {
       ...data,
       id,

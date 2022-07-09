@@ -21,7 +21,7 @@ export const useUser = () => {
 
   useEffect(() => {
     onAuth(setUser)
-  }, [user])
+  }, [])
 
   useEffect(() => {
     user === USER_STATES.NOT_LOGGED && router.push('/')

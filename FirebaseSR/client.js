@@ -1,6 +1,7 @@
 import { initializeApp, getApps } from 'firebase/app'
 import { GithubAuthProvider, signInWithPopup, getAuth, onAuthStateChanged } from 'firebase/auth'
 import { getFirestore, collection, getDocs, addDoc, Timestamp, orderBy, query } from 'firebase/firestore'
+import { getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 const firebaseConfig = {
   apiKey: 'AIzaSyCAWNARb370xpaExSnXyjF6FXxm2TD_ArA',
   authDomain: 'nmkzdev-f2502.firebaseapp.com',
@@ -74,11 +75,12 @@ export const loginWithGithub = () => {
  * @returns A promise that resolves to a document reference.
  */
 
-export const addDevit = async ({ avatar, content, userId, userName }) => {
+export const addDevit = async ({ avatar, content, userId, userName, img }) => {
   try {
     const docRef = await addDoc(collection(db, 'devits'), {
       avatar,
       content,
+      img,
       userId,
       userName,
       createdAt: Timestamp.fromDate(new Date()),
@@ -104,4 +106,10 @@ export const fetchLatestDevits = async () => {
       createdAt: +createdAt.toDate()
     }
   })
+}
+
+export const uploadImage = (file) => {
+  const storage = getStorage()
+  const REF = ref(storage, `images/${file.name}`)
+  return uploadBytesResumable(REF, file)
 }

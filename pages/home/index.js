@@ -38,6 +38,7 @@ export default function HomePage () {
                 id={twit.id}
                 key={twit.id}
                 message={twit.content}
+                img={twit.img}
                 userId={twit.userId}
                 username={twit.userName}
               />

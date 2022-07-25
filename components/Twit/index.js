@@ -13,7 +13,7 @@ export const Twit = ({ avatar, username, message, img, id, userId, createdAt }) 
           <header>
             <strong>{username}</strong>
             <span> - </span>
-            <span className='date'>{timeago}</span>
+            <time>{timeago}</time>
           </header>
           <p>{message}</p>
           {img && <img src={img} />}
@@ -33,7 +33,7 @@ export const Twit = ({ avatar, username, message, img, id, userId, createdAt }) 
                 line-height: 1.3125;
                 margin: 0;
             }
-            .date{
+            time {
               color: #555;
               font-size: 14px;
             }

@@ -1,4 +1,3 @@
-import { AppLayout } from '@c/AppLayout'
 import { Avatar } from '@c/Avatar'
 import Button from '@c/Button'
 import { getDownloadURL } from 'firebase/storage'
@@ -94,27 +93,25 @@ export default function ComposeTweet () {
   const isButtonDisabled = !message.length || status === COMPOSE_STATES.LOADING
   return (
     <>
-      <AppLayout>
-        <Head>
-          <title>Crear Devit | NMKZ</title>
-        </Head>
-        <div className='form-container'>
-          <section className='avatar-container'>
-            {typeof user !== 'undefined' && <Avatar src={user.avatar} alt={user.username} />}
-          </section>
-          <form onSubmit={handleSubmit}>
-            <textarea placeholder='Que hay de nuevo?' value={message} onChange={handleMessage} onDragEnter={handleDragEnter} onDragLeave={handleDragLeave} onDrop={handleDrop} />
-            {imgUrl &&
-              <section>
-                <button onClick={() => setImgUrl(null)}>X</button>
-                <img src={imgUrl} />
-              </section>}
-            <div>
-              <Button disabled={isButtonDisabled}>Devitear</Button>
-            </div>
-          </form>
-        </div>
-      </AppLayout>
+      <Head>
+        <title>Crear Devit | NMKZ</title>
+      </Head>
+      <div className='form-container'>
+        <section className='avatar-container'>
+          {typeof user !== 'undefined' && <Avatar src={user.avatar} alt={user.username} />}
+        </section>
+        <form onSubmit={handleSubmit}>
+          <textarea placeholder='Que hay de nuevo?' value={message} onChange={handleMessage} onDragEnter={handleDragEnter} onDragLeave={handleDragLeave} onDrop={handleDrop} />
+          {imgUrl &&
+            <section>
+              <button onClick={() => setImgUrl(null)}>X</button>
+              <img src={imgUrl} />
+            </section>}
+          <div>
+            <Button disabled={isButtonDisabled}>Devitear</Button>
+          </div>
+        </form>
+      </div>
       <style jsx>
         {`
           div {

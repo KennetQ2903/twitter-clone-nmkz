@@ -1,5 +1,4 @@
 import { Twit } from '@c/Twit'
-import { AppLayout } from 'components/AppLayout'
 import { fetchLatestDevits } from 'FirebaseSR/client'
 import { useUser } from 'hooks/userUser'
 import CreateIcon from 'Icons/createIcon'
@@ -22,15 +21,14 @@ export default function HomePage () {
 
   return (
     <>
-      <AppLayout>
-        <Head>
-          <title>Home | NMKZ</title>
-        </Head>
-        <header>
-          <h2>Inicio</h2>
-        </header>
-        <section>
-          {
+      <Head>
+        <title>Home | NMKZ</title>
+      </Head>
+      <header>
+        <h2>Inicio</h2>
+      </header>
+      <section>
+        {
             timeline.map(twit => (
               <Twit
                 avatar={twit.avatar}
@@ -44,26 +42,25 @@ export default function HomePage () {
               />
             ))
           }
-        </section>
-        <nav>
-          <Link href='/home'>
-            <a>
-              <HomeIcon stroke='#09f' height={32} width={32} />
-            </a>
-          </Link>
-          <Link href='/'>
-            <a>
-              <SearchIcon stroke='#09f' height={32} width={32} />
-            </a>
-          </Link>
-          <Link href='/compose/tweet'>
-            <a>
-              <CreateIcon stroke='#09f' height={32} width={32} />
-            </a>
-          </Link>
-        </nav>
+      </section>
+      <nav>
+        <Link href='/home'>
+          <a>
+            <HomeIcon stroke='#09f' height={32} width={32} />
+          </a>
+        </Link>
+        <Link href='/'>
+          <a>
+            <SearchIcon stroke='#09f' height={32} width={32} />
+          </a>
+        </Link>
+        <Link href='/compose/tweet'>
+          <a>
+            <CreateIcon stroke='#09f' height={32} width={32} />
+          </a>
+        </Link>
+      </nav>
 
-      </AppLayout>
       <style jsx>
         {`
             header {

@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import Head from 'next/head'
-import { AppLayout } from 'components/AppLayout'
 import Button from 'components/Button'
 import { loginWithGithub } from 'FirebaseSR/client'
 import Image from 'next/image'
@@ -28,22 +27,20 @@ export default function Home () {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <AppLayout>
-        <section>
-          <Image src='/dev.png' alt='logo' width='120px' height='120px' />
-          <h1> Developers talking with developers</h1>
-          {
+      <section>
+        <Image src='/dev.png' alt='logo' width='120px' height='120px' />
+        <h1> Developers talking with developers</h1>
+        {
             user === USER_STATES.NOT_LOGGED &&
               <Button onClick={handleClick}>
                 Login with Github
                 <img style={{ marginLeft: '10px' }} src='/github.png' alt='login icon' width='24px' height='24px' />
               </Button>
           }
-          {
+        {
             user === USER_STATES.NOT_KNOW && <Spinner />
           }
-        </section>
-      </AppLayout>
+      </section>
 
       <style jsx>{`
           section {

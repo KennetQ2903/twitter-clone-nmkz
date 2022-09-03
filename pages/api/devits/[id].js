@@ -7,7 +7,14 @@ export default (req, res) => {
     .doc(id)
     .get()
     .then(doc => {
-      res.json(doc.data())
+      const data = doc.data()
+      const { id } = doc
+      const { createdAt } = data
+      res.json({
+        ...data,
+        id,
+        createdAt: +createdAt.toDate()
+      })
     }).catch(err => {
       console.error(err)
       res.status(404).end()

@@ -29,6 +29,6 @@ export const useTimeAgo = (timestamp) => {
   }, [timestamp])
 
   const { value, unit } = timeago
-  const relativeTime = new Intl.RelativeTimeFormat(navigator.language, { style: 'short' })
+  const relativeTime = new Intl.RelativeTimeFormat('ES-es', { style: 'short' })
   return relativeTime.format(value, unit)
 }

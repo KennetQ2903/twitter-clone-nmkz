@@ -1,11 +1,18 @@
 import { Avatar } from '@c/Avatar'
 import { useTimeAgo } from 'hooks/useTimeAgo'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export const Twit = ({ avatar, username, message, img, id, userId, createdAt }) => {
   const timeago = useTimeAgo(createdAt)
+  const router = useRouter()
+  const handleArticleClick = (e) => {
+    e.preventDefault()
+    router.push('/status/[id]', `/status/${id}`)
+  }
   return (
     <>
-      <article>
+      <article onClick={handleArticleClick}>
         <div>
           <Avatar src={avatar} alt={username} />
         </div>
@@ -13,7 +20,11 @@ export const Twit = ({ avatar, username, message, img, id, userId, createdAt }) 
           <header>
             <strong>{username}</strong>
             <span> - </span>
-            <time>{timeago}</time>
+            <Link href={`/status/${id}`}>
+              <a>
+                <time>{timeago}</time>
+              </a>
+            </Link>
           </header>
           <p>{message}</p>
           {img && <img src={img} />}
@@ -26,6 +37,10 @@ export const Twit = ({ avatar, username, message, img, id, userId, createdAt }) 
                 border-bottom: 2px solid #eaf7ff;
                 padding: 10px 15px;
             }
+            article:hover{
+              background: #f5f8fa;
+              cursor: pointer;
+            }
             div{
                 padding-right: 10px;
             }
@@ -33,9 +48,13 @@ export const Twit = ({ avatar, username, message, img, id, userId, createdAt }) 
                 line-height: 1.3125;
                 margin: 0;
             }
-            time {
+            a {
               color: #555;
               font-size: 14px;
+              text-decoration: none;
+            }
+            a:hover {
+              text-decoration: underline;
             }
             img {
               margin-top: 10px;

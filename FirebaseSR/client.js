@@ -1,6 +1,6 @@
 import { initializeApp, getApps } from 'firebase/app'
 import { GithubAuthProvider, signInWithPopup, getAuth, onAuthStateChanged } from 'firebase/auth'
-import { getFirestore, collection, getDocs, addDoc, Timestamp, orderBy, query } from 'firebase/firestore'
+import { getFirestore, collection, getDocs, addDoc, Timestamp, orderBy, query, onSnapshot } from 'firebase/firestore'
 import { getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 const firebaseConfig = {
   apiKey: 'AIzaSyCAWNARb370xpaExSnXyjF6FXxm2TD_ArA',
@@ -93,19 +93,29 @@ export const addDevit = async ({ avatar, content, userId, userName, img }) => {
   }
 }
 
+const mapDevitFromFireBaseToTwitObject = doc => {
+  const data = doc.data()
+  const { id } = doc
+  const { createdAt } = data
+  return {
+    ...data,
+    id,
+    createdAt: +createdAt.toDate()
+  }
+}
+
+export const listenLatestUpdates = async (callback) => {
+  const devitsRef = collection(db, 'devits')
+  return onSnapshot(query(devitsRef, orderBy('createdAt', 'desc')), ({ docs }) => {
+    const newTwits = docs.map(mapDevitFromFireBaseToTwitObject)
+    callback(newTwits)
+  })
+}
+
 export const fetchLatestDevits = async () => {
   const devitsRef = collection(db, 'devits')
   const querySnapshot = await getDocs(query(devitsRef, orderBy('createdAt', 'desc')))
-  return querySnapshot.docs.map(doc => {
-    const data = doc.data()
-    const { id } = doc
-    const { createdAt } = data
-    return {
-      ...data,
-      id,
-      createdAt: +createdAt.toDate()
-    }
-  })
+  return querySnapshot.docs.map(mapDevitFromFireBaseToTwitObject)
 }
 
 export const uploadImage = (file) => {

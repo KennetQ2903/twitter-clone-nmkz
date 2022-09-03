@@ -13,7 +13,7 @@ export default function Home () {
 
   const handleClick = () => {
     loginWithGithub()
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
   }
   useEffect(() => {
     user && router.replace('/home')
@@ -45,6 +45,7 @@ export default function Home () {
       <style jsx>{`
           section {
             display: grid;
+            margin-top: 10px;
             place-content: center;
             place-items: center;
             height: 100%;

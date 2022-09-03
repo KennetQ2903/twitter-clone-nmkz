@@ -1,5 +1,5 @@
 import { Twit } from '@c/Twit'
-import { fetchLatestDevits } from 'FirebaseSR/client'
+import { listenLatestUpdates } from 'FirebaseSR/client'
 import { useUser } from 'hooks/userUser'
 import CreateIcon from 'Icons/createIcon'
 import HomeIcon from 'Icons/Home'
@@ -15,8 +15,9 @@ export default function HomePage () {
 
   /* Fetching the data from the API and setting the state of the timeline. */
   useEffect(() => {
-    user && fetchLatestDevits()
-      .then(setTimeline)
+    if (user) {
+      const unsub = listenLatestUpdates(setTimeline)
+    }
   }, [user])
 
   return (
